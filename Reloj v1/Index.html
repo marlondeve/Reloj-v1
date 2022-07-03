@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Css Botones v1</title>
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <style>
+  *{
+    margin: 0;
+    padding: 0;
+    font-family: 'Pooppins', sans-serif;
+  }
+  html, body{
+    display: grid;
+    height: 100%;
+    place-items: center;
+    background: #000;
+  }
+  .wrapper{
+    height: 100px;
+    width: 360px;
+    cursor: default;
+    background: linear-gradient(135deg, #14ffe9, #ff3b3b, #ff00e0);
+    border-radius: 10px;
+    animation: animate 1.5s linear infinite;
+  }
+  .wrapper .display, .wrapper span{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  .wrapper .display{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 999;
+    background: #1b1b1b;
+    height: 85px;
+    width: 345px;
+    border-radius: 6px;
+    text-align: center;
+  }
+  .wrapper .display #tiempo{
+    line-height: 85px;
+    font-size: 50px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    background: linear-gradient(135deg, #14ffe9, #ff3b3b, #ff00e0);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: animate 1.5s linear infinite;
+  }
+
+  @keyframes animate{
+    100%{
+      filter: hue-rotate(360deg);
+    }
+
+  }
+  .wrapper span{
+    height: 100%;
+    width: 100%;
+    background: inherit;
+    border-radius: 10px;
+  }
+
+  .wrapper span:first-child{
+    filter: blur(10px);
+  }
+  .wrapper span:last-child{
+    filter: blur(20px);
+  }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <div class="display">
+      <div id="tiempo">12:00:00 PM</div>
+    </div>
+    <span></span>
+    <span></span>
+  </div>
+</body>
+<script>
+  setInterval(()=>{
+    const tiempo = document.querySelector("#tiempo");
+    let date = new Date();
+    let hora = date.getHours();
+    let minutos = date.getMinutes();
+    let segundos = date.getSeconds();
+    let dia_noche = "AM";
+    if(hora >12){
+      dia_noche = "PM";
+      hora = hora -12;
+    }
+    if(segundos <10){
+      segundos = "0" + segundos;
+    }
+    if(minutos <10){
+      minutos = "0" + minutos;
+    }
+    if(hora <10){
+      hora = "0" + hora;
+    }
+    tiempo.textContent = hora + ":" + minutos+ ":" +segundos + " " + dia_noche;
+  });
+
+</script>
+</html>
